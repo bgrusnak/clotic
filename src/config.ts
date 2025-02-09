@@ -26,6 +26,6 @@ export function getConfig(env: Env): Config {
     TELEGRAM_API_URL: env.TELEGRAM_API_URL,
     RATE_LIMIT_PRIVATE: parseInt(env.RATE_LIMIT_PRIVATE, 10) || 1,
     RATE_LIMIT_CHANNEL: parseInt(env.RATE_LIMIT_CHANNEL, 10) || 20,
-    RATE_LIMIT_GLOBAL: parseInt(env.RATE_LIMIT_GLOBAL, 30) || 30,
+    RATE_LIMIT_GLOBAL: parseInt(env.RATE_LIMIT_GLOBAL, 10) || 30,
   };
 }
