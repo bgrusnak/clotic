@@ -110,8 +110,8 @@ You need to get the DB id after this step
 Update `wrangler.json`
 
   > ⚠ **Replace `<YOUR_CLOUDFLARE_ACCOUNT_ID>`  with actual value!**  
-  > ⚠ **Replace `<YOUR_TELEGRAM_BOT_TOKEN>` with actual value!**
-  > ⚠ **Replace `<YOUR_D1_DATABASE_ID>` with actual value!**  
+  > ⚠ **Replace `<YOUR_TELEGRAM_BOT_TOKEN>` with actual value!**  
+  > ⚠ **Replace `<YOUR_D1_DATABASE_ID>` with actual value!**   
 
 
 4. **Initialize the Storages**
