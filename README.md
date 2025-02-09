@@ -134,10 +134,9 @@ The `wrangler.json` file includes settings and bindings necessary to deploy Clot
 
 Deploy Clotic using Cloudflare Wrangler:
 
-```bash
-npm run deploy
-npm run init-remote
-```
+  ```bash
+  npm run deploy
+  ```
 
 Ensure that you have set up the required environment variables (e.g., `TELEGRAM_API_TOKEN`, `TELEGRAM_API_URL`, `RATE_LIMIT_PRIVATE`, `RATE_LIMIT_CHANNEL`), and that your D1 database and R2 bucket bindings are correctly configured in your Cloudflare dashboard.
 
