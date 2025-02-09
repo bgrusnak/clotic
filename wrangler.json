@@ -27,7 +27,7 @@
   ],
   "r2_buckets": [
     {
-      "binding": "R1_BUCKET",
+      "binding": "R2_BUCKET",
       "bucket_name": "clotic"
     }
   ],
