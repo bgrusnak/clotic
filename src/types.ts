@@ -15,7 +15,7 @@ export interface MessageRecord {
   userId: string;
   content: string;
   mediaType: MediaType;
-  fileReference?: string; // Could be a Telegram file_id, an R1 key, or a URL.
+  fileReference?: string; // Could be a Telegram file_id, an R2 key, or a URL.
   processed: boolean;
   attempts: number;
   processingDate: number; // Timestamp when the message should be processed.
@@ -37,7 +37,7 @@ export interface TelegramResponse {
  */
 export interface Env {
   D1_DB: D1Database;
-  R1_BUCKET: R2Bucket;
+  R2_BUCKET: R2Bucket;
   TELEGRAM_API_TOKEN: string;
   TELEGRAM_API_URL: string;
   RATE_LIMIT_PRIVATE: string;
@@ -50,6 +50,6 @@ export interface Env {
  */
 export interface FileRecord {
   telegramFileId: string | null; // The file identifier provided by Telegram, may be null if not yet obtained.
-  r1Key: string; // The key under which the file is stored in the R1 (R2Bucket) storage.
+  r2Key: string; // The key under which the file is stored in the R2 (R2Bucket) storage.
   createdAt: number; // Timestamp when the file record was created.
 }

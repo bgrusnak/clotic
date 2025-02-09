@@ -23,7 +23,7 @@ export async function handleIncomingMessage(
     }
     const msg = data.message;
     const db = new Database(env.D1_DB);
-    const storage = new StorageHelper(env.R1_BUCKET);
+    const storage = new StorageHelper(env.R2_BUCKET);
     const config = getConfig(env);
 
     const now = Date.now();
@@ -57,14 +57,14 @@ export async function handleIncomingMessage(
         const fileDownloadUrl = `${config.TELEGRAM_API_URL}/file/bot${config.TELEGRAM_API_TOKEN}/${filePath}`;
         const fileRes = await fetch(fileDownloadUrl);
         const fileBlob = await fileRes.blob();
-        const r1Key = `files/${fileReference}`;
-        await storage.putFile(r1Key, fileBlob);
+        const r2Key = `files/${fileReference}`;
+        await storage.putFile(r2Key, fileBlob);
         await db.insertFileRecord({
           telegramFileId: null,
-          r1Key,
+          r2Key,
           createdAt: now,
         });
-        fileReference = r1Key;
+        fileReference = r2Key;
       }
     } else if (msg.document) {
       fileReference = msg.document.file_id;

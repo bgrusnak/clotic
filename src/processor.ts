@@ -45,7 +45,7 @@ async function sleepUntilNextSecond(): Promise<void> {
 export async function processMessages(env: Env): Promise<void> {
   const db = new Database(env.D1_DB);
   const config = getConfig(env);
-  const storage = new StorageHelper(env.R1_BUCKET);
+  const storage = new StorageHelper(env.R2_BUCKET);
   const telegramClient = new TelegramClient(env, db, storage);
 
   const processingDuration = 59 * 1000; // Total processing window of 59 seconds.

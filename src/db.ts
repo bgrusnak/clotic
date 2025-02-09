@@ -121,34 +121,34 @@ export class Database {
   /**
    * Inserts a new file record.
    */
-  async insertFileRecord(record: { telegramFileId: string | null, r1Key: string, createdAt: number }): Promise<void> {
+  async insertFileRecord(record: { telegramFileId: string | null, r2Key: string, createdAt: number }): Promise<void> {
     const query = `
-      INSERT INTO file_identifiers (telegramFileId, r1Key, createdAt)
+      INSERT INTO file_identifiers (telegramFileId, r2Key, createdAt)
       VALUES (?, ?, ?)
     `;
     await this.db.prepare(query)
-      .bind(record.telegramFileId, record.r1Key, record.createdAt)
+      .bind(record.telegramFileId, record.r2Key, record.createdAt)
       .run();
   }
 
   /**
  * Updates the Telegram file ID in an existing file record, typically after successfully sending the file via the Telegram API.
- * @param r1Key - The R1 storage key associated with the file record.
+ * @param r2Key - The R2 storage key associated with the file record.
  * @param telegramFileId - The new Telegram file ID to update the record with.
  */
-  async updateFileRecordTelegramId(r1Key: string, telegramFileId: string): Promise<void> {
-    const query = `UPDATE file_identifiers SET telegramFileId = ? WHERE r1Key = ?`;
-    await this.db.prepare(query).bind(telegramFileId, r1Key).run();
+  async updateFileRecordTelegramId(r2Key: string, telegramFileId: string): Promise<void> {
+    const query = `UPDATE file_identifiers SET telegramFileId = ? WHERE r2Key = ?`;
+    await this.db.prepare(query).bind(telegramFileId, r2Key).run();
   }
 
     /**
-   * Retrieves a file record from the "file_identifiers" table based on the provided R1 storage key.
-   * @param r1Key - The key used to store the file in the R1 (R2Bucket) storage.
+   * Retrieves a file record from the "file_identifiers" table based on the provided R2 storage key.
+   * @param r2Key - The key used to store the file in the R2 (R2Bucket) storage.
    * @returns The file record if found, otherwise null.
    */
-    async getFileRecordByR1Key(r1Key: string): Promise<FileRecord | null> {
-      const query = `SELECT * FROM file_identifiers WHERE r1Key = ? LIMIT 1`;
-      const result = await this.db.prepare(query).bind(r1Key).first<FileRecord>();
+    async getFileRecordByR2Key(r2Key: string): Promise<FileRecord | null> {
+      const query = `SELECT * FROM file_identifiers WHERE r2Key = ? LIMIT 1`;
+      const result = await this.db.prepare(query).bind(r2Key).first<FileRecord>();
       return result || null;
     }
 }

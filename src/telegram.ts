@@ -75,22 +75,22 @@ export class TelegramClient {
       photo = fileRecordByTg.telegramFileId;
       return await this.sendPhotoByFileId(chatId, photo as string, caption);
     }
-    // If no record is found by Telegram file_id, try to find it by the R1 storage key.
-    const fileRecordByR1 = await this.db.getFileRecordByR1Key(message.fileReference!);
-    if (fileRecordByR1) {
-      if (fileRecordByR1.telegramFileId) {
+    // If no record is found by Telegram file_id, try to find it by the R2 storage key.
+    const fileRecordByR2 = await this.db.getFileRecordByR2Key(message.fileReference!);
+    if (fileRecordByR2) {
+      if (fileRecordByR2.telegramFileId) {
         // If the file record has been updated with a Telegram file_id, send it using that file_id.
-        photo = fileRecordByR1.telegramFileId;
+        photo = fileRecordByR2.telegramFileId;
         return await this.sendPhotoByFileId(chatId, photo as string, caption);
       } else {
         // Otherwise, attempt to send the file as a multipart form (uploading the file content).
-        const fileBlob = await this.storage.getFile(fileRecordByR1.r1Key);
+        const fileBlob = await this.storage.getFile(fileRecordByR2.r2Key);
         if (!fileBlob) {
           // If the file does not exist in storage, treat the fileReference as a URL and send the photo accordingly.
           photo = message.fileReference!;
           return await this.sendPhotoByUrl(chatId, photo, caption);
         } else {
-          return await this.sendPhotoMultipart(chatId, fileBlob, caption, fileRecordByR1.r1Key);
+          return await this.sendPhotoMultipart(chatId, fileBlob, caption, fileRecordByR2.r2Key);
         }
       }
     }
@@ -155,15 +155,15 @@ export class TelegramClient {
 
   /**
    * Sends a photo message using multipart/form-data to upload the file buffer.
-   * This method is used when the file is stored in the R1 storage and must be uploaded directly.
+   * This method is used when the file is stored in the R2 storage and must be uploaded directly.
    * @param chatId - The chat identifier where the message should be sent.
    * @param fileBlob - The Blob containing the photo data.
    * @param caption - The caption for the photo message.
-   * @param r1Key - The key used to reference the file in R1 storage.
+   * @param r2Key - The key used to reference the file in R2 storage.
    * @returns An object indicating the success of the operation and the API response. If successful,
    *          it also updates the file record with the new Telegram file_id.
    */
-  async sendPhotoMultipart(chatId: string, fileBlob: Blob, caption: string, r1Key: string): Promise<TelegramSendResult> {
+  async sendPhotoMultipart(chatId: string, fileBlob: Blob, caption: string, r2Key: string): Promise<TelegramSendResult> {
     const url = `${this.config.TELEGRAM_API_URL}/bot${this.config.TELEGRAM_API_TOKEN}/sendPhoto`;
     const formData = new FormData();
     formData.append("chat_id", chatId);
@@ -181,7 +181,7 @@ export class TelegramClient {
         // Choose the last element from the photo array, which usually represents the highest quality image.
         const photos = data.result.photo;
         const newFileId = photos[photos.length - 1].file_id;
-        await this.db.updateFileRecordTelegramId(r1Key, newFileId);
+        await this.db.updateFileRecordTelegramId(r2Key, newFileId);
         return { success: true, newFileId, response: data };
       }
       return { success: data.ok, response: data };
