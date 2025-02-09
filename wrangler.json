@@ -1,0 +1,41 @@
+{
+  "name": "clotic",
+  "main": "dist/index.js",
+  "account_id": "<YOUR_CLOUDFLARE_ACCOUNT_ID>",
+  "workers_dev": true,
+  "compatibility_date": "2024-09-23",
+  "compatibility_flags": [
+    "nodejs_compat_v2"
+  ],
+  "build": {
+    "command": "npm run initdb-remote && npm run build",
+    "cwd": "."
+  },
+  "vars": {
+    "TELEGRAM_API_TOKEN": "<YOUR_TELEGRAM_BOT_TOKEN>",
+    "TELEGRAM_API_URL": "https://api.telegram.org",
+    "RATE_LIMIT_PRIVATE": "1",
+    "RATE_LIMIT_CHANNEL": "20",
+    "RATE_LIMIT_GLOBAL": "30"
+  },
+  "d1_databases": [
+    {
+      "binding": "D1_DB",
+      "database_name": "clotic",
+      "database_id": "<YOUR_D1_DATABASE_ID>"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "R1_BUCKET",
+      "bucket_name": "clotic"
+    }
+  ],
+  "triggers": {
+    "crons": ["* * * * *"]
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  } 
+}

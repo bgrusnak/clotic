@@ -1,0 +1,22 @@
+{
+    "name": "clotic",
+    "version": "1.0.0",
+    "author": "Ilya A.Shlyalhovoy <bulgarus@inbox.ru>",
+    "license": "MIT",
+    "description": "Advanced telegram bot on the Cloudflare network",
+    "private": false,
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "tsc",
+        "deploy": "wrangler deploy",
+        "dev": "wrangler dev",
+        "initdb": "wrangler d1 execute clotic --file=init.sql",
+        "initdb-remote": "wrangler d1 execute clotic --file=init.sql --remote",
+        "setup": "$npm_execpath run initdb && wrangler r2 bucket create clotic"        
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@cloudflare/workers-types": "^4.20230726.0",
+        "typescript": "^5.0.0"
+    }
+}
