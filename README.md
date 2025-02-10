@@ -71,8 +71,7 @@ clotic/
     ├── telegram.ts            // Telegram API client for sending messages.
     ├── rateLimiter.ts         // Implements rate limiting logic.
     ├── processor.ts           // Processes prepared messages (e.g., sending them via the Telegram API).
-    ├── messageHandler.ts      // HTTP handler for processing incoming Telegram updates.
-    ├── followUp.ts            // Implements the follow-up step to update messages.
+    ├── messageHandler.ts      // HTTP handler for processing incoming Telegram updates. 
     ├── workflow.ts            // Defines workflow steps (save, delay, update) using Cloudflare Workflows. 
     └── index.ts               // Entry point for the Worker: fetch and scheduled handlers.
 ```
