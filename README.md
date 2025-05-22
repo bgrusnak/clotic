@@ -135,6 +135,7 @@ Deploy Clotic using Cloudflare Wrangler:
 
   ```bash
   npm run deploy
+  npm run migrate-remote
   ```
 
 Ensure that you have set up the required environment variables (e.g., `TELEGRAM_API_TOKEN`, `TELEGRAM_API_URL`, `RATE_LIMIT_PRIVATE`, `RATE_LIMIT_CHANNEL`), and that your D1 database and R2 bucket bindings are correctly configured in your Cloudflare dashboard.

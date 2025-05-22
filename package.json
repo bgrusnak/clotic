@@ -1,22 +1,28 @@
 {
     "name": "clotic",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "author": "Ilya A.Shlyalhovoy <bulgarus@inbox.ru>",
     "license": "MIT",
     "description": "Advanced telegram bot on the Cloudflare network",
     "private": false,
     "main": "dist/index.js",
+    "type": "module",
     "scripts": {
         "build": "tsc",
         "deploy": "wrangler deploy",
         "dev": "wrangler dev",
-        "initdb": "wrangler d1 execute clotic --file=init.sql",
-        "initdb-remote": "wrangler d1 execute clotic --file=init.sql --remote",
-        "setup": "$npm_execpath run initdb && wrangler r2 bucket create clotic"        
+        "setup": "$npm_execpath run migrate && wrangler r2 bucket create clotic",
+        "migrate": "tsx migrations/migration_runner.ts",
+        "migrate-remote": "tsx migrations/migration_runner.ts --remote",
+        "rollback": "tsx migrations/migration_runner.ts --rollback",
+        "rollback-remote": "tsx migrations/migration_runner.ts --rollback --remote",
+        "migration:new": "tsx migrations/create_migration.ts"
     },
     "dependencies": {},
     "devDependencies": {
         "@cloudflare/workers-types": "^4.20230726.0",
+        "@types/node": "^20.0.0",
+        "tsx": "^4.0.0",
         "typescript": "^5.0.0"
     }
 }
