@@ -12,6 +12,7 @@
     "cwd": "."
   },
   "vars": {
+    "DOMAIN":"<PROJECT.USER>.workers.dev",
     "TELEGRAM_API_TOKEN": "<YOUR_TELEGRAM_BOT_TOKEN>",
     "TELEGRAM_API_URL": "https://api.telegram.org",
     "RATE_LIMIT_PRIVATE": "1",
