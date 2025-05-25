@@ -1,6 +1,6 @@
 {
     "name": "clotic",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "author": "Ilya A.Shlyalhovoy <bulgarus@inbox.ru>",
     "license": "MIT",
     "description": "Advanced telegram bot on the Cloudflare network",

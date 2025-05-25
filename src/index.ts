@@ -1,7 +1,8 @@
 // src/index.ts
 import { runWorkflow } from "./workflow";
 import { processMessages } from "./processor"; 
-import { Env } from "./types";
+import { Env } from "./types/default";
+import { startPolling, setupWebhook } from "./polling";
 
 /**
  * The fetch handler for processing incoming HTTP requests.
@@ -12,7 +13,14 @@ export async function fetch(
   env: Env,
   ctx: ExecutionContext
 ): Promise<Response> {
-  // Run the workflow which includes saving the message, waiting 15 seconds, and updating it.
+  // Check if this is a development mode initialization request
+  if (env.DEV === "true") {
+    // In development mode, start polling instead of handling webhook requests
+    ctx.waitUntil(startPolling(env));
+    return new Response("Development mode started with long polling", { status: 200 });
+  }
+
+  // Production mode: handle webhook requests normally
   const workflowResult = await runWorkflow(request, env);
   return workflowResult.response;
 }
@@ -26,6 +34,11 @@ export async function scheduled(
   env: Env,
   ctx: ExecutionContext
 ): Promise<void> { 
+  // Initialize webhook setup in production mode
+  if (env.DEV !== "true" && env.DOMAIN) {
+    ctx.waitUntil(setupWebhook(env));
+  }
+  
   ctx.waitUntil(processMessages(env));
 }
 

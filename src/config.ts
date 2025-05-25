@@ -1,7 +1,7 @@
 // src/config.ts
 // This file exports the configuration settings by reading environment variables and returning a strongly typed configuration object.
 
-import { Env } from "./types";
+import { Env } from "./types/default";
 
 /**
  * Interface representing the configuration settings required by the application.

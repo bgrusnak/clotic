@@ -4,7 +4,7 @@
 // sends the messages via the Telegram API, and updates the database based on the outcome.
 // It continues processing messages in a loop until the processing window (59 seconds) expires.
 
-import { Env, MessageRecord } from "./types";
+import { Env, MessageRecord } from "./types/default";
 import { Database } from "./db";
 import { StorageHelper } from "./storage";
 import { TelegramClient, TelegramSendResult } from "./telegram";

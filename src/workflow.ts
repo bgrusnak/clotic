@@ -1,5 +1,5 @@
 // src/workflow.ts
-import { Env } from "./types";
+import { Env } from "./types/default";
 import { Database } from "./db";
 import { handleIncomingMessage } from "./messageHandler"; 
 

@@ -43,6 +43,8 @@ export interface Env {
   RATE_LIMIT_PRIVATE: string;
   RATE_LIMIT_CHANNEL: string;
   RATE_LIMIT_GLOBAL: string;
+  DEV?: string;
+  DOMAIN?: string;
 }
 
 /**

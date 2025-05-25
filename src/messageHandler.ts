@@ -1,5 +1,5 @@
 // src/messageHandler.ts
-import { Env, MessageRecord } from "./types";
+import { Env, MessageRecord } from "./types/default";
 import { Database } from "./db";
 import { StorageHelper } from "./storage";
 import { getConfig } from "./config";

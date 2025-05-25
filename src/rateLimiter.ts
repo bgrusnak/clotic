@@ -3,9 +3,9 @@
 // The function groups messages by chat and enforces a limit on how many messages can be sent per second,
 // depending on whether the chat is a private chat or a channel.
 
-import { MessageRecord } from "./types";
+import { MessageRecord } from "./types/default";
 import { getConfig } from "./config";
-import { Env } from "./types";
+import { Env } from "./types/default";
 
 /**
  * Applies rate limiting to a batch of messages by grouping them according to their chat ID

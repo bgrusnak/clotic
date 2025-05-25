@@ -2,7 +2,7 @@
 // This file implements the TelegramClient class which handles sending messages via the Telegram API.
 // It supports sending text messages as well as media messages (e.g., photos) using different methods such as sending by file ID, URL, or multipart/form-data.
 
-import { Env, TelegramResponse, MessageRecord, FileRecord } from "./types";
+import { Env, TelegramResponse, MessageRecord, FileRecord } from "./types/default";
 import { getConfig } from "./config";
 import { Database } from "./db";
 import { StorageHelper } from "./storage";

@@ -1,5 +1,5 @@
 // src/db.ts
-import { MessageRecord, FileRecord } from "./types";
+import { MessageRecord, FileRecord } from "./types/default";
 
 export class Database {
   private db: D1Database;
